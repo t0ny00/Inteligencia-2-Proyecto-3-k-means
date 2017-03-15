@@ -15,6 +15,12 @@ class Cluster:
         self.points = []
         self.point_index = []
 
+    def emptyIndex(self):
+    	return self.point_index == []
+
+    def getPointsIndex(self):
+    	return self.point_index
+
     def getCentroid(self):
         return self.centroid
 

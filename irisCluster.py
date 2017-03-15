@@ -1,5 +1,12 @@
 import numpy as np
 from cluster import Cluster,kmeans,compress,createClusters
+import os.path
+import matplotlib.pyplot as plt
+
+colors = ['b','g','r','c','m']
+file = open("iris-clean.txt",'r')
+
+
 
 def splitData(data,percentage,output_num):
     cut_index = int(round((percentage/float(100))*data.shape[0]))
@@ -17,9 +24,37 @@ def splitData(data,percentage,output_num):
     return data_train,data_test
 
 if __name__ == '__main__':
-    k = 4
+    k = 5
     number_attributes = 4
     data = np.loadtxt("iris-clean.txt", delimiter=",")
     x, junk = splitData(data, 100, 1)
-    clusters = createClusters(k, number_attributes, 0, 8)
-    kmeans(clusters, x, 0.001,8)
+    ready = False
+    while(not ready):
+        ready = True
+        clusters = createClusters(k, number_attributes, 0, 8)
+        kmeans(clusters, x, 0.001,8)
+        for elem in clusters:
+            if elem.emptyIndex():
+                ready = False
+
+    
+    print("Number of clusters " + str(len(clusters)))
+    for j in range(2):
+        for i in range(len(clusters)):
+            print("Cluster "+str(i+1))
+            print(clusters[i])
+            centroid = clusters[i].getCentroid()
+            indexes = clusters[i].getPointsIndex()
+            plt.plot([centroid[0+j*2]],[centroid[1+j*2]],colors[i]+'X')
+            for elem in indexes:
+                marker = ''
+                if elem < 50:
+                    marker = '*'
+                elif elem >= 50 and elem < 100:
+                    marker = 'D'
+                elif elem >= 100:
+                    marker = '^'
+                act = data[elem]
+                plt.plot([act[0+j*2]],[act[1+j*2]],colors[i]+marker)
+        plt.savefig(os.path.splitext(os.path.basename("k" + str(k) + "-" + str(j+1)))[0] + '.png')
+    #plt.show()
