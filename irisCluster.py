@@ -2,6 +2,7 @@ import numpy as np
 from cluster import Cluster,kmeans,compress,createClusters
 import os.path
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 
 colors = ['b','g','r','c','m']
 file = open("iris-clean.txt",'r')
@@ -24,7 +25,7 @@ def splitData(data,percentage,output_num):
     return data_train,data_test
 
 if __name__ == '__main__':
-    k = 5
+    k = 4
     number_attributes = 4
     data = np.loadtxt("iris-clean.txt", delimiter=",")
     x, junk = splitData(data, 100, 1)
@@ -57,4 +58,5 @@ if __name__ == '__main__':
                 act = data[elem]
                 plt.plot([act[0+j*2]],[act[1+j*2]],colors[i]+marker)
         plt.savefig(os.path.splitext(os.path.basename("k" + str(k) + "-" + str(j+1)))[0] + '.png')
+        plt.clf()
     #plt.show()
