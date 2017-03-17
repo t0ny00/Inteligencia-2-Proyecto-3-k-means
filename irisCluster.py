@@ -27,7 +27,7 @@ def splitData(data,percentage,output_num):
     return data_train,data_test
 
 if __name__ == '__main__':
-    k = 3
+    k = 5
     number_attributes = 4
     data = np.loadtxt("iris-clean.txt", delimiter=",")
     x, junk = splitData(data, 100, 1)
@@ -49,6 +49,12 @@ if __name__ == '__main__':
         names   = []
         legend_labeler = [True,True,True,True]
         plt.title("Cluster distribution for Iris with " + str(k) + " clusters part " + str(j+1))
+        if j == 0:
+            plt.xlabel('Sepal Length')
+            plt.ylabel('Sepal Width')
+        else:
+            plt.xlabel('Petal Length')
+            plt.ylabel('Petal Width')
         for i in range(nclusters):
             patches.append(mpatches.Patch(color=colors[i]))
             names.append('Cluster '+str(i+1))
@@ -72,7 +78,7 @@ if __name__ == '__main__':
                 act = data[elem]
                 if elem < 50:
                     marker = '*'
-                    index_label = "iris setosa element"
+                    index_label = "iris setosa"
                     if legend_labeler[1]:
                         obj = plt.scatter(act[0+j*2],act[1+j*2],c=colors[i],marker=marker)
                         obj_copy = copy.copy(obj)
@@ -84,7 +90,7 @@ if __name__ == '__main__':
                         plt.scatter(act[0+j*2],act[1+j*2],c=colors[i],marker=marker)
                 elif elem >= 50 and elem < 100:
                     marker = 'D'
-                    index_label = "iris versicolor element"
+                    index_label = "iris versicolor"
                     if legend_labeler[2]:
                         obj = plt.scatter(act[0+j*2],act[1+j*2],c=colors[i],marker=marker)
                         obj_copy = copy.copy(obj)
@@ -96,7 +102,7 @@ if __name__ == '__main__':
                         plt.scatter(act[0+j*2],act[1+j*2],c=colors[i],marker=marker)
                 elif elem >= 100:
                     marker = '^'
-                    index_label = "iris virginica element"
+                    index_label = "iris virginica"
                     if legend_labeler[3]:
                         obj = plt.scatter(act[0+j*2],act[1+j*2],c=colors[i],marker=marker)
                         obj_copy = copy.copy(obj)
