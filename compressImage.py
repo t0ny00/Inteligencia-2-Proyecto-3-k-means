@@ -1,15 +1,20 @@
 import sys
+import os
 from scipy import misc
 import Image
 from cluster import Cluster,kmeans,compress,createClusters
 
 if __name__ == '__main__':
 
-    k = 128
+    if len(sys.argv) != 5 :
+        print "Usage: compressImage.py <numero_de_clusters> <threshold> <num_iteraciones> <nombre_imagen_con_extension> "
+        exit(1)
+
+    k = int(sys.argv[1])
+    threshold = float(sys.argv[2])
+    max_iter = int(sys.argv[3])
+    file_name = sys.argv[4]
     number_attributes = 3
-    threshold = 0.1
-    max_iter = 5
-    file_name = 'flor.png'
 
     # Load image
     image = misc.imread(file_name)
@@ -27,7 +32,7 @@ if __name__ == '__main__':
     x = x.reshape(image.shape)
 
     im = Image.fromarray(x)
-    out_file = file_name[:-4]
+    out_file = os.path.basename(file_name)[:-4]
     out_file += "_" + str(k) + ".png"
     im.show()
     im.save(out_file)

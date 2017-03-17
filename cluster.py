@@ -67,6 +67,7 @@ def kmeans(clusters, x, threshold,max_iter):
                     index_of_cluster = clusters.index(cluster)
                     min_dist = dist
             clusters[index_of_cluster].addPoint(point,point_index)
+
         old_centroids = []
 
         # Store old centroid values and calculate the new ones
@@ -74,7 +75,7 @@ def kmeans(clusters, x, threshold,max_iter):
             old_centroids.append(cluster.centroid)
             cluster.calculateCentroid()
 
-        # If the distance between the old centroid and the new one is less than the threshold, assume convergence
+        # If the distance between the old centroids and the new ones is less than the threshold, assume convergence
         for i in range(len(clusters)) :
             cluster = clusters[i]
             if (cluster.calculateDistance(old_centroids[i]) > threshold) : break
