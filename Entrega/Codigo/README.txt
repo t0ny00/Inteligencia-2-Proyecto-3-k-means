@@ -11,7 +11,11 @@ Esta carpeta contiene todos los archivos utilizados para la implementacion del t
 cluster.py: contiene la definicion de la clase cluster, el algoritmo de kmeans y los metodos utilizados en las distintas actividades.
 
 irisCluster.py: script para realizar la actividad 2 del proyecto que consta en agrupar el dataset iris.txt usando distintos k.
+		
+		Uso: python irisCluster.py <numero_de_clusters> <threshold> <num_iteraciones>
 
 compressImage.py: script para realizar la actividad 3 del proyecto que consta en comprimir una imagen variando el numero de clusters.
 
 		Uso: python compressImage.py <numero_de_clusters> <threshold> <num_iteraciones> <nombre_imagen_con_extension> 
+
+iris-clean.txt: dataset iris
